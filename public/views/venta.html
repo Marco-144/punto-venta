@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto de Venta</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    
+    <!-- Menú de navegación  -->
+    <div id="menu-container"></div>
+
+    <div class="flex h-[calc(100vh - 120px)] p-4 gap-4">
+        
+        <!-- PUBLICIDAD -->
+        <div class="w-1/5 flex items-end">
+            <div class="h-[76vh] max-h-full w-full bg-white rounded-2xl shadow-md overflow-hidden mb-3">
+                <img src="https://i.pinimg.com/originals/0a/f8/2d/0af82d5a0a8630df636f5b32e200fd3b.jpg" class="h-full w-full object-cover">
+            </div>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="flex-1 flex gap-4">
+
+            <!-- PRODUCTOS -->
+             <div class="w-3/4 flex flex-col">
+
+                <div class="mb-4">
+                    <h2 class="text-lg font-semibold mb-2">Buscar Artículos</h2>
+
+                    <div class="relative">
+                        <input id="buscar-articulo" type="text" autocomplete="off"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3"
+                        placeholder="Escanear o ingresar código de artículo...">
+
+                        <div id="lista-articulos" class="hidden absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-md max-h-64 overflow-y-auto z-50"></div>
+                    </div>
+                </div>
+                
+                <div class="mb-9"></div>
+                <div class="relative overflow-x-auto bg-transparent">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-white uppercase bg-[#1c2140]">
+                            <tr>
+                                <th class="px-6 py-3 rounded-l-lg">Artículo</th>
+                                <th class="px-6 py-3">Precio</th>
+                                <th class="px-6 py-3">Cantidad</th>
+                                <th class="px-6 py-3 rounded-r-lg">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detalle-venta" class="bg-transparent">
+                            <tr>
+                                <td class="px-6 py-6 text-sm text-gray-400" colspan="4">No hay artículos agregados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+             </div>
+
+            <!-- RESUMEN -->
+            <div class="w-1/4 self-end mt-8 space-y-3">
+
+                <div id="modal-cantidad" class="hidden">
+                    <div class="bg-white border border-gray-200 rounded-xl shadow-xl p-4">
+                        <h3 class="text-sm font-semibold text-gray-800 mb-1">Agregar cantidad</h3>
+                        <p id="modal-cantidad-articulo" class="text-xs text-gray-500 mb-3">Artículo seleccionado</p>
+                        <input id="modal-cantidad-input" type="number" min="1" step="1"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 mb-3"
+                            placeholder="Cantidad">
+                        <div class="flex justify-end gap-2">
+                            <button id="modal-cancelar" type="button" class="px-3 py-2 text-xs font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">Cancelar</button>
+                            <button id="modal-confirmar" type="button" class="px-3 py-2 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3">
+                    <button class="h-16 bg-white border border-gray-200 rounded-xl shadow-sm hover:bg-gray-50 hover:shadow-md text-gray-700 flex flex-col items-center justify-center text-xs font-medium transition">
+                        <span class="text-base">💵</span>
+                        <span class="mt-1">Efectivo</span>
+                    </button>
+                    <button class="h-16 bg-white border border-gray-200 rounded-xl shadow-sm hover:bg-gray-50 hover:shadow-md text-gray-700 flex flex-col items-center justify-center text-xs font-medium transition">
+                        <span class="text-base">💳</span>
+                        <span class="mt-1">Tarjeta</span>
+                    </button>
+                    <button class="h-16 bg-white border border-gray-200 rounded-xl shadow-sm hover:bg-gray-50 hover:shadow-md text-gray-700 flex flex-col items-center justify-center text-xs font-medium transition">
+                        <span class="text-base">⚙️</span>
+                        <span class="mt-1">Otros</span>
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 flex flex-col">
+
+                    <div>
+                        <h2 class="text-lg font-semibold mb-4">Resumen de Orden</h2>
+
+                    <div class="flex justify-between mb-2">
+                        <span>Subtotal:</span>
+                        <span id="subtotal-venta">$0.00</span>
+                    </div>
+
+                    <div class="flex justify-between mb-2">
+                        <span>Impuestos (16%):</span>
+                        <span id="impuestos-venta">$0.00</span>
+                    </div>
+
+                    <div class="flex justify-between font-bold text-lg border-t pt-3 mt-3">
+                        <span>Total:</span>
+                        <span id="total-venta">$0.00</span>
+                    </div>
+
+                    <div class="mt-6">
+                        <!-- <label class="block text-sm mb-1">Pago con:</label>
+                        <input type="number"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3"> -->
+
+                        <div class="flex justify-between font-medium">
+                            <span>Cambio:</span>
+                            <span>$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                    <button
+                    class="mt-6 text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-3">
+                    Finalizar Venta
+                    </button>
+                </div>
+            </div>
+    </div>
+
+    <!-- Script para cargar widget -->
+    <script>
+        fetch("../components/menu.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("menu-container").innerHTML = data;
+        });
+    </script>
+
+    <script src="../js/venta.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+    
+</body>
+</html>
