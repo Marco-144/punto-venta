@@ -39,3 +39,7 @@ if (tbody) {
         tbody.innerHTML += fila;
     });
 }
+
+// Contar el numero de clientes
+
+document.getElementById("total-clientes").textContent = clientes.length;
