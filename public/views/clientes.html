@@ -4,8 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet">
 </head>
 <body>
-    <p>Hola </p>
+    <!-- llamando al menu -->
+    <div id="menu-container"></div>
+
+    <div class="flex h-[calc(100vh - 120px)] p-4 gap-4 justify-center">
+        <div class="w-full max-w-4xl flex flex-col">
+
+                <div class="mb-4 ">
+                    <h2 class="text-lg font-semibold mb-2">Buscar Clientes</h2>
+
+                    <div class="relative z-0 w-full mb-5 group">
+                        <input id="buscar-cliente" type="text" autocomplete="off"
+                        class="bg-gray-230 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-3 "
+                        placeholder="Buscar Cliente por nombre, empresa o teléfono...">
+
+                        <div id="lista-clientes" class="hidden absolute left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-md max-h-64 overflow-y-auto z-50"></div>
+                    </div>
+                </div>
+                
+                <div class="mb-9"></div>
+                <div class="relative overflow-x-auto bg-transparent">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-white uppercase bg-[#1c2140]">
+                            <tr>
+                                <th class="px-6 py-3 rounded-l-lg">Nombre</th>
+                                <th class="px-6 py-3">Empresa</th>
+                                <th class="px-6 py-3">Telefono</th>
+                                <th  class= "px-6 py-3">Correo</th>
+                                <th class="px-6 py-3">Rango</th>
+                                <th class="px-6 py-3 rounded-r-lg"> Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detalle-clientes" class="bg-transparent">
+                            <tr>
+                                <td class="px-6 py-6 text-sm text-gray-400" colspan="6">No hay clientes agregados</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+
+    <!-- Para llamar -->
+    <script>
+        fetch("../components/menu.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("menu-container").innerHTML = data;
+        });
+    </script>
+
+    <script src="../js/clientes.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+
 </body>
+
+
 </html>
