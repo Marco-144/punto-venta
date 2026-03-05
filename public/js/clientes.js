@@ -1,4 +1,3 @@
-
 const clientes = [
     {id: 1, nombre: "Marco", Empresa: "Papeleria Marco", telefono: "1234567890", correo: "marco@example.com", monedero: 150, Rango: "Plata"}, 
     {id: 2, nombre: "Luisa", Empresa: "Luisa S.A.", telefono: "0987654321", correo: "luisa@example.com", monedero: 200, Rango: "Oro"},
