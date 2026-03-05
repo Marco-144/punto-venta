@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Ventas</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
+</head>
+
+<body class="h-full bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <div id="menu-container"></div>
+
+    <main class="p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-5">
+            <div class="flex items-center justify-between mb-4">
+                <h1 class="text-2xl font-semibold">Registro de Ventas</h1>
+            </div>
+
+            <div class="relative overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-600 dark:text-gray-300">
+                    <thead class="text-xs text-white uppercase bg-[#1c2140]">
+                        <tr>
+                            <th class="px-4 py-3 rounded-l-lg">Folio</th>
+                            <th class="px-4 py-3">Fecha</th>
+                            <th class="px-4 py-3">Artículos</th>
+                            <th class="px-4 py-3">N°Artículos</th>
+                            <th class="px-4 py-3">Metodo Pago</th>
+                            <th class="px-4 py-3">Total</th>
+                            <th class="px-4 py-3 rounded-r-lg">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-registro-ventas" class="bg-white dark:bg-gray-800"></tbody>
+                </table>
+            </div>
+
+            <section
+                class="mt-6 p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40">
+                <h2 class="text-lg font-semibold mb-3">Reimprimir boucher</h2>
+                <div class="flex gap-3">
+                    <select id="select-venta-reimpresion"
+                        class="flex-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-sm rounded-lg p-2.5"></select>
+                    <button id="btn-reimprimir" type="button"
+                        class="px-4 py-2.5 text-sm text-white bg-blue-600 hover:bg-blue-700 rounded-lg">
+                        Reimprimir
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        fetch("../components/menu.html")
+            .then((response) => response.text())
+            .then((data) => {
+                document.getElementById("menu-container").innerHTML = data;
+            });
+    </script>
+    <script src="../js/registroVentas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+</body>
+
+</html>
