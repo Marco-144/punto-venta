@@ -13,9 +13,10 @@
     <!-- Menu de navegacion -->
     <div id="menu-container"></div>
 
-    <div class="flex h-[calc(100vh_-_120px)] p-4 gap-4 justify-center">
-        <div class="w-full max-w-6xl flex flex-col">
-            <div class="mb-6">
+    <div class="flex h-[calc(100vh-120px)] p-4 gap-4 justify-center">
+      <div class="flex-1 flex gap-4 justify-center min-w-0">
+        <div class="w-full max-w-5xl flex flex-col">
+          <div class="mb-6">
                 <h2 class="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">Gestion de Descuentos</h2>
                 <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">Busca y administra descuentos por rango de cliente.</p>
 
@@ -28,24 +29,93 @@
                 </div>
             </div>
 
-            <div class="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md w-full mx-auto">
-                <div class="overflow-x-auto">
-                    <table class="w-full min-w-[760px] text-sm text-left text-gray-600 dark:text-gray-300">
-                    <thead class="text-xs text-white uppercase bg-[#1c2140] dark:bg-gray-700">
-                        <tr>
-                            <th class="px-6 py-4">ID Rango</th>
-                            <th class="px-6 py-4">Nombre</th>
-                            <th class="px-6 py-4">Rango</th>
-                            <th class="px-6 py-4 text-right">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detalle-descuentos" class="divide-y divide-gray-100 dark:divide-gray-700">
-                      
-                    </tbody>
-                </table>
+                <div class="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-md w-full mx-auto">
+                    <div class="overflow-x-auto">
+                        <table class="w-full min-w-[920px] text-sm text-left text-gray-600 dark:text-gray-300">
+                        <thead class="text-xs text-white uppercase bg-[#1c2140] dark:bg-gray-700">
+                            <tr>
+                            <th class="px-6 py-4">ID</th>
+                                <th class="px-6 py-4">Nombre</th>
+                            <th class="px-6 py-4">Rangos</th>
+                            <th class="px-6 py-4">Inventario Base</th>
+                                <th class="px-6 py-4 text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detalle-descuentos" class="divide-y divide-gray-100 dark:divide-gray-700">
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <aside class="w-full lg:w-1/4 h-full min-h-0 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-md p-5 flex flex-col">
+        <div class="flex-1 min-h-0 overflow-y-auto pr-1">
+          <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mt-6 mb-3">
+            Gestion de Descuentos
+          </h2>
+          <div class="mt-4 bg-white border border-gray-200 rounded-xl p-6 shadow-sm text-center dark:bg-gray-700 dark:border-gray-600">
+            <p class="text-sm text-gray-500 uppercase tracking-wide dark:text-gray-400">Descuentos Activos</p>
+            <p id="total-descuentos" class="text-4xl font-bold text-blue-600 mt-2">0</p>
+          </div>
+         
+          <div class="my-6 border-t border-gray-200 dark:border-gray-700"></div>
+
+
+          <form id="form-descuento" class="space-y-4">
+            
+            <input id="input-descuento-nombre" type="text" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
+              placeholder="Nombre del descuento" required />
+
+            <div class="grid grid-cols-2 gap-2">
+              <input id="input-descuento-porcentaje" type="number" min="1" max="100" step="1"
+                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
+                placeholder="% Descuento" required />
+              <input id="input-descuento-monedero" type="number" min="0" max="100" step="1"
+                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
+                placeholder="% Monedero" />
+            </div>
+
+            <div>
+              <p class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Rangos aplicables</p>
+              <div id="grupo-rangos" class="grid grid-cols-2 gap-2">
+                <label class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200"><input type="checkbox" name="rango" value="Sin Rango" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">Sin Rango</label>
+                <label class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200"><input type="checkbox" name="rango" value="Diamante" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">Diamante</label>
+                <label class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200"><input type="checkbox" name="rango" value="Oro" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">Oro</label>
+                <label class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200"><input type="checkbox" name="rango" value="Plata" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">Plata</label>
+                <label class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200"><input type="checkbox" name="rango" value="Bronce" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">Bronce</label>
+              </div>
+            </div>
+
+            <div>
+              <label for="buscar-inventario-descuento" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Inventario base</label>
+              <input id="buscar-inventario-descuento" type="text"
+                class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder-gray-400"
+                placeholder="Buscar articulo por nombre, folio o codigo" />
+              <div id="lista-inventario-descuento" class="mt-2 max-h-44 overflow-y-auto rounded-lg border border-gray-200 dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700 bg-white dark:bg-gray-900"></div>
+              <p id="resumen-inventario-seleccion" class="mt-2 text-xs text-gray-500 dark:text-gray-400">0 productos seleccionados</p>
+            </div>
+
+            <label class="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
+              <input id="input-descuento-activo" type="checkbox" checked
+                class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+              Activo
+            </label>
+
+            <div class="grid grid-cols-2 gap-2">
+              <button id="btn-guardar-descuento" type="submit"
+                class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-4 py-2.5">
+                Guardar
+              </button>
+              <button id="btn-cancelar-descuento" type="button"
+                class="text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 font-medium rounded-lg text-sm px-4 py-2.5">
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </aside>
+
     </div>
 
     <!-- Script para cargar widget -->
@@ -57,6 +127,7 @@
             });
     </script>
 
+    <script src="../js/inventario.js"></script>
     <script src="../js/descuentos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
