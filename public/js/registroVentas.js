@@ -53,6 +53,8 @@ function construirHtmlBoucher(venta) {
                 <br>
 				<p><strong>Folio:</strong> ${venta.id}</p>
 				<p><strong>Fecha:</strong> ${venta.fechaTexto || venta.fechaISO}</p>
+                <p><strong>Cliente:</strong> ${venta.cliente?.nombre || "Publico general"}</p>
+                <p><strong>Rango:</strong> ${venta.cliente?.rango || "Sin rango"}</p>
 				<p><strong>Método:</strong> ${venta.metodoPago}</p>
 				<table>
 					<thead>
@@ -63,10 +65,13 @@ function construirHtmlBoucher(venta) {
 					</tbody>
 				</table>
 				<div class="totales">
+                    <p><strong>Subtotal sin descuento:</strong> ${formatearMoneda(venta.subtotalSinDescuento ?? venta.subtotal)}</p>
+                    <p><strong>Descuento:</strong> ${formatearMoneda(venta.descuento || 0)}</p>
 					<p><strong>Subtotal:</strong> ${formatearMoneda(venta.subtotal)}</p>
 					<p><strong>Impuestos:</strong> ${formatearMoneda(venta.impuestos)}</p>
 					<p><strong>Total:</strong> ${formatearMoneda(venta.total)}</p>
 					<p><strong>Cambio:</strong> ${formatearMoneda(venta.cambio)}</p>
+                    <p><strong>Descuentos aplicados:</strong> ${(venta.descuentosAplicados || []).length ? venta.descuentosAplicados.join(", ") : "Ninguno"}</p>
 				</div>
 			</body>
 		</html>
@@ -105,7 +110,7 @@ function renderizar() {
     const ventas = obtenerRegistroVentas();
 
     if (!ventas.length) {
-        tablaRegistroVentas.innerHTML = '<tr><td colspan="7" class="px-4 py-6 text-center text-gray-500">No hay ventas registradas</td></tr>';
+        tablaRegistroVentas.innerHTML = '<tr><td colspan="9" class="px-4 py-6 text-center text-gray-500">No hay ventas registradas</td></tr>';
         selectVentaReimpresion.innerHTML = '<option value="">Sin ventas</option>';
         return;
     }
@@ -116,9 +121,11 @@ function renderizar() {
 				<tr class="border-b border-gray-200 dark:border-gray-700">
 					<td class="px-4 py-3">${venta.id}</td>
 					<td class="px-4 py-3">${venta.fechaTexto || new Date(venta.fechaISO).toLocaleString()}</td>
+                        <td class="px-4 py-3">${venta.cliente?.nombre || "Publico general"}</td>
                     <td class="px-4 py-3">${(venta.articulos || []).map((item) => item.articulo).join(", ")}</td>
                     <td class="px-4 py-3">${(venta.articulos || []).reduce((acum, item) => acum + Number(item.cantidad || 0), 0)}</td>
 					<td class="px-4 py-3">${venta.metodoPago}</td>
+                        <td class="px-4 py-3">${formatearMoneda(venta.descuento || 0)}</td>
 					<td class="px-4 py-3">${formatearMoneda(venta.total)}</td>
 					<td class="px-4 py-3">
 						<button type="button" data-id="${venta.id}" class="btn-imprimir px-3 py-1.5 text-xs text-white bg-blue-600 hover:bg-blue-700 rounded-md">Imprimir</button>

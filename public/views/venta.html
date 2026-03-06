@@ -69,8 +69,17 @@
             <!-- RESUMEN -->
             <div class="w-1/4 self-end mt-8 space-y-3">
 
-                <div id="modal-cantidad" class="hidden">
-                    <div class="bg-white border border-gray-200 rounded-xl shadow-xl p-4">
+                <div class="bg-white rounded-lg shadow-md p-4 space-y-2">
+                    <label for="input-cliente-venta" class="block text-sm font-medium text-gray-700">Cliente</label>
+                    <input id="input-cliente-venta" type="text" autocomplete="off"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                        placeholder="Escribe el nombre del cliente...">
+                    <p id="cliente-descuento-info" class="text-xs text-gray-500">Sin cliente seleccionado</p>
+                </div>
+
+                <div id="modal-cantidad" class="hidden fixed inset-0 z-50 items-center justify-center p-4">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                    <div class="relative w-full max-w-sm bg-white border border-gray-200 rounded-xl shadow-xl p-4">
                         <h3 class="text-sm font-semibold text-gray-800 mb-1">Agregar cantidad</h3>
                         <p id="modal-cantidad-articulo" class="text-xs text-gray-500 mb-3">Artículo seleccionado</p>
                         <input id="modal-cantidad-input" type="number" min="1" step="1"
@@ -81,6 +90,24 @@
                                 class="px-3 py-2 text-xs font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">Cancelar</button>
                             <button id="modal-confirmar" type="button"
                                 class="px-3 py-2 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="modal-tarjeta" class="hidden fixed inset-0 z-50 items-center justify-center p-4">
+                    <div class="absolute inset-0 bg-black/40"></div>
+                    <div class="relative w-full max-w-sm bg-white border border-gray-200 rounded-xl shadow-xl p-4">
+                        <h3 class="text-sm font-semibold text-gray-800 mb-1">Pago con tarjeta</h3>
+                        <p class="text-xs text-gray-500 mb-3">Ingresa el número de tarjeta para procesar el pago.</p>
+                        <input id="modal-tarjeta-input" type="text" inputmode="numeric" autocomplete="off"
+                            class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 mb-2"
+                            placeholder="Número de tarjeta">
+                        <p id="modal-tarjeta-estado" class="text-xs text-gray-500 mb-3"></p>
+                        <div class="flex justify-end gap-2">
+                            <button id="modal-tarjeta-cancelar" type="button"
+                                class="px-3 py-2 text-xs font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">Cancelar</button>
+                            <button id="modal-tarjeta-confirmar" type="button"
+                                class="px-3 py-2 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">Confirmar</button>
                         </div>
                     </div>
                 </div>
@@ -111,6 +138,11 @@
                         <div class="flex justify-between mb-2">
                             <span>Subtotal:</span>
                             <span id="subtotal-venta">$0.00</span>
+                        </div>
+
+                        <div class="flex justify-between mb-2">
+                            <span>Descuento:</span>
+                            <span id="descuento-venta">$0.00</span>
                         </div>
 
                         <div class="flex justify-between mb-2">
